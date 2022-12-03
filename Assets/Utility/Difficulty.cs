@@ -1,0 +1,1 @@
+public enum Difficulty { Basic, Advanced, Extreme }

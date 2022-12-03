@@ -9,7 +9,7 @@ public class GameplayBoundsResolver : MonoBehaviour
     public Bounds InterfaceBounds { get; set; }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Camera camera = Camera.main;
 

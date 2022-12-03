@@ -6,15 +6,20 @@ public class NotefieldRenderer : MonoBehaviour
 {
     [Tooltip("Width of border lines")]
     public float lineWidth = 0.1f;
+    private GameplayBoundsResolver _boundsResolver;
     private Bounds _noteFieldBounds;
     private GameObject[,] _fieldLines = new GameObject[2, 3];
     private Shader _lineShader;
 
+    void Awake() {
+        _boundsResolver = Camera.main.GetComponent<GameplayBoundsResolver>();
+        _lineShader = Resources.Load("Shaders/LineShader") as Shader;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        _noteFieldBounds = Camera.main.GetComponent<GameplayBoundsResolver>().PlayAreaBounds;
-        _lineShader = Resources.Load("Shaders/LineShader") as Shader;
+        _noteFieldBounds = _boundsResolver.PlayAreaBounds;
         DrawGameFieldLines();
     }
 
