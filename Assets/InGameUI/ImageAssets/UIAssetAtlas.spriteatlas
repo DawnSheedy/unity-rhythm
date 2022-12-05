@@ -77,36 +77,36 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 85d220af34bb0ba41b6ef180fd1364f0, type: 3}
   m_PackedSpriteNamesToIndex:
   - ScoreTextDisplay_00007
-  - ScoreText_00003
+  - AAA
   - ScoreTextDisplay_00004
-  - ScoreText_00005
+  - A
   - ScoreTextDisplay_00011
-  - ScoreText_00008
+  - D
   - ScoreTextDisplay_00010
   - ScoreTextDisplay_00009
   - ScoreTextDisplay_00015
   - pointsDisplay
   - ScoreTextDisplay_00020
   - ScoreTextDisplay_00000
-  - ScoreText_00002
+  - S
   - ScoreTextDisplay_00001
-  - ScoreText_00010
+  - PreScore
   - ScoreTextDisplay_00013
   - ScoreTextDisplay_00019
   - ScoreTextDisplay_00012
   - ScoreTextDisplay_00006
-  - ScoreText_00006
-  - ScoreText_00004
+  - B
+  - AA
   - ScoreTextDisplay_00014
   - ScoreTextDisplay_00002
-  - ScoreText_00007
+  - C
   - ScoreTextDisplay_00017
   - ScoreTextDisplay_00008
   - songFrame
-  - ScoreText_00000
+  - SSS
   - ScoreTextDisplay_00005
-  - ScoreText_00001
-  - ScoreText_00009
+  - SS
+  - F
   - ScoreTextDisplay_00003
   - ScoreTextDisplay_00018
   - ScoreTextDisplay_00016

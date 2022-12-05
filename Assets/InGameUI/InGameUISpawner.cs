@@ -6,7 +6,10 @@ public class InGameUISpawner : MonoBehaviour
 {
     [Tooltip("Prefab for banner art rendering sprite.")]
     public GameObject BannerArtRendererPrefab;
+    [Tooltip("Prefab for score rendering")]
+    public GameObject ScoreRendererPrefab;
     private GameObject _bannerArt;
+    private GameObject _scoreArea;
     private Shader _lineShader;
     private GameObject _bottomLine;
     // Start is called before the first frame update
@@ -14,8 +17,10 @@ public class InGameUISpawner : MonoBehaviour
     {
         Bounds interfaceBounds = Camera.main.GetComponent<GameplayBoundsResolver>().InterfaceBounds;
         Vector3 upperInterfaceSpawnPoint = interfaceBounds.min + new Vector3(1, interfaceBounds.size.y-1f, 0);
+        Vector3 lowerInterfaceSpawnPoint = interfaceBounds.max - new Vector3(0, interfaceBounds.size.y, 0);
         _lineShader = Resources.Load<Shader>("Shaders/LineShader");
         _bannerArt = GameObject.Instantiate(BannerArtRendererPrefab, upperInterfaceSpawnPoint, Quaternion.identity);
+        _scoreArea = GameObject.Instantiate(ScoreRendererPrefab, lowerInterfaceSpawnPoint, Quaternion.identity);
         CreateBottomBorder(interfaceBounds);
     }
 
@@ -36,6 +41,8 @@ public class InGameUISpawner : MonoBehaviour
     void Destroy() {
         Resources.UnloadAsset(_lineShader);
         Destroy(_bottomLine);
+        Destroy(_scoreArea);
+        Destroy(_bannerArt);
     }
 
     // Update is called once per frame

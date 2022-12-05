@@ -19,25 +19,28 @@ public class NoteController : MonoBehaviour
     private GameObject _noteScoreLayer;
     private NoteHoldAnimator _noteHoldAnimator;
     private NoteJudgementAnimator _noteScoreAnimator;
+    private ScoreKeeper _scoreKeeper;
     private float PerfectThreshold = (40f/1000f)*300f;
     private float GreatThreshold = (80f/1000f)*300f;
     private float GoodThreshold = (160f/1000f)*300f;
 
+    void Awake() {
+        _noteHoldLayer = Instantiate(animationLayerPrefab, gameObject.transform.localPosition, Quaternion.identity);
+        _noteScoreLayer = Instantiate(animationLayerPrefab, gameObject.transform.localPosition, Quaternion.identity);
+        _noteScoreAnimator = _noteScoreLayer.AddComponent<NoteJudgementAnimator>();
+        _noteHoldAnimator = _noteHoldLayer.AddComponent<NoteHoldAnimator>();
+        _scoreKeeper = GameObject.Find("GameplayController").GetComponent<ScoreKeeper>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        _noteHoldLayer = Instantiate(animationLayerPrefab, gameObject.transform.localPosition, Quaternion.identity);
-        _noteScoreLayer = Instantiate(animationLayerPrefab, gameObject.transform.localPosition, Quaternion.identity);
         _noteHoldLayer.transform.position += new Vector3(0, 0, 0.01f);
         _noteHoldLayer.transform.localScale = gameObject.transform.localScale;
         _noteHoldLayer.name = gameObject.name + " (Note Hold Indicator)";
-        _noteHoldAnimator = _noteHoldLayer.AddComponent<NoteHoldAnimator>();
         _noteScoreLayer.transform.position += new Vector3(0, 0, -0.01f);
         _noteScoreLayer.transform.localScale = gameObject.transform.localScale;
         _noteScoreLayer.name = gameObject.name + " (Score Indicator)";
-        _noteScoreAnimator = _noteScoreLayer.AddComponent<NoteJudgementAnimator>();
         _noteScoreAnimator.parentNote = gameObject;
-
         _timeKeeper = GameObject.Find("Conductor").GetComponent<AudioTimeKeeper>();
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _animator = gameObject.GetComponent<Animator>();
@@ -51,7 +54,7 @@ public class NoteController : MonoBehaviour
     void Update() {
         // If note is done rendering, goal was in the past, and the user never clicked it, judge as a miss.
         if (_noteReadyForJudgement && _animator.GetCurrentAnimatorStateInfo(0).IsName(IdleAnim) && _timeKeeper.getTick() > _nextJudgementTime) {
-            ProcessJudgement(3);
+            ProcessJudgement(Judgement.Miss);
         }
     }
 
@@ -65,19 +68,20 @@ public class NoteController : MonoBehaviour
         float tickDifference = Mathf.Abs(currentTick - _nextJudgementTime);
 
         if (tickDifference < PerfectThreshold) {
-            ProcessJudgement(0);
+            ProcessJudgement(Judgement.Perfect);
         } else if (tickDifference < GreatThreshold) {
-            ProcessJudgement(1);
+            ProcessJudgement(Judgement.Great);
         } else if (tickDifference < GoodThreshold) {
-            ProcessJudgement(2);
+            ProcessJudgement(Judgement.Good);
         } else {
-            ProcessJudgement(3);
+            ProcessJudgement(Judgement.Miss);
         }
     }
 
-    void ProcessJudgement(int level) {
+    void ProcessJudgement(Judgement judgement) {
         _noteReadyForJudgement = false;
-        _noteScoreAnimator.DisplayJudgement(level);
+        _noteScoreAnimator.DisplayJudgement(judgement);
+        _scoreKeeper.ProcessJudgement(judgement);
     }
 
     void OnTouchEnd() {
@@ -88,10 +92,15 @@ public class NoteController : MonoBehaviour
         _animator.Play(IdleAnim);
     }
 
+    public void MarkFirst() {
+        _noteHoldAnimator.MarkFirst();
+    }
+
     public void LeadIn(float targetTiming)
     {
         _nextJudgementTime = targetTiming;
         _noteReadyForJudgement = true;
+        _noteHoldLayer.SendMessage("JudgementStarting");
         _animator.Play(JudgementApproachAnim);
     }
 }

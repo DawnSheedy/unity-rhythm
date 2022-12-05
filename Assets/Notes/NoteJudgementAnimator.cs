@@ -15,15 +15,15 @@ public class NoteJudgementAnimator : MonoBehaviour
         _animator = gameObject.GetComponent<Animator>();       
     }
  
-    public void DisplayJudgement(int level) {
-        switch (level) {
-            case 0:
+    public void DisplayJudgement(Judgement judgement) {
+        switch (judgement) {
+            case Judgement.Perfect:
                 _animator.Play(PerfectAnim);
                 break;
-            case 1:
+            case Judgement.Great:
                 _animator.Play(GreatAnim);
                 break;
-            case 2:
+            case Judgement.Good:
                 _animator.Play(GoodAnim);
                 break;
         }

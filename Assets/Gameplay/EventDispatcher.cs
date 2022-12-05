@@ -13,29 +13,42 @@ public class EventDispatcher : MonoBehaviour
         _ticks = new Queue<Tick>();
         _controller = GameObject.Find("GameplayController").GetComponent<GameplayController>();
         _noteSpawner = GameObject.Find("NoteField").GetComponent<NoteSpawner>();
-        string songData = LoadSongJSON(_controller.getNoteFilePath());
-        RawNoteDataSet dataSet = RawNoteDataSet.createEventsFromJSON(songData);
-
-        int currentTick = 0;
-        int firstElementInTick = 0;
-        for (int i = 0; i <= dataSet.events.Length; i++)
-        {
-            // If we're out of bounds, drop tick to -1 which will save the last events and then exit loop
-            int newTick = i == dataSet.events.Length ? -1 : dataSet.events[i].tick;
-            if (newTick != currentTick)
-            {
-                _ticks.Enqueue(new Tick(currentTick, GameplayEvent.createFromRangeOfRawData(ref dataSet.events, firstElementInTick, i - 1)));
-                firstElementInTick = i;
-                currentTick = newTick;
-            }
-        }
-        // All events now loaded into ticks.
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        string songData = LoadSongJSON(_controller.getNoteFilePath());
+        RawNoteDataSet dataSet = RawNoteDataSet.createEventsFromJSON(songData);
+        int currentTick = 0;
+        int firstElementInTick = 0;
+        bool foundFirstNotes = false;
+        int noteCount = 0;
+        for (int i = 0; i <= dataSet.events.Length; i++)
+        {
+            if (i < dataSet.events.Length && dataSet.events[i].type == 0) {
+                noteCount++;
+            }
+            // If we're out of bounds, drop tick to -1 which will save the last events and then exit loop
+            int newTick = i == dataSet.events.Length ? -1 : dataSet.events[i].tick;
+            if (newTick != currentTick)
+            {
+                GameplayEvent[] newEvent = GameplayEvent.createFromRangeOfRawData(ref dataSet.events, firstElementInTick, i - 1);
+                if (!foundFirstNotes) {
+                    for (int x=0; x<newEvent.Length; x++) {
+                        GameplayEvent currEvent = newEvent[x];
+                        if (currEvent.type == GameplayEventType.Note) {
+                            foundFirstNotes = true;
+                            _noteSpawner.markFirstNote(currEvent.eventMeta);
+                        }
+                    }
+                }
+                _ticks.Enqueue(new Tick(currentTick, newEvent));
+                firstElementInTick = i;
+                currentTick = newTick;
+            }
+        }
+        _controller.GetComponent<ScoreKeeper>().ReportNoteCount(noteCount);
     }
 
     // Update is called once per frame

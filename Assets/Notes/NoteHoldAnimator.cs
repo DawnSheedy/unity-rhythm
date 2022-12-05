@@ -6,9 +6,11 @@ public class NoteHoldAnimator : MonoBehaviour
 {
     private string TouchStartAnim = "TouchStart";
     private string TouchEndAnim = "TouchEnd";
+    private string GetReadyAnim = "GetReady";
+    private bool first;
     private Animator _animator;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _animator = gameObject.GetComponent<Animator>();       
     }
@@ -19,5 +21,17 @@ public class NoteHoldAnimator : MonoBehaviour
 
     void OnTouchEnd() {
         _animator.Play(TouchEndAnim);
+    }
+
+    public void MarkFirst() {
+        _animator.Play(GetReadyAnim);
+        first = true;
+    }
+
+    void JudgementStarting() {
+        if (first) {
+            first = false;
+            OnTouchEnd();
+        }
     }
 }

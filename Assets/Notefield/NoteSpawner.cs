@@ -49,6 +49,10 @@ public class NoteSpawner : MonoBehaviour
         _noteControllers[index].LeadIn(targetTiming);
     }
 
+    public void markFirstNote(int index) {
+        _noteControllers[index].MarkFirst();   
+    }
+
     private GameObject SpawnNote(int index) {
         int x = index % 4;
         int y = index / 4;

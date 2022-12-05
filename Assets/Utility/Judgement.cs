@@ -1,0 +1,1 @@
+public enum Judgement { Perfect, Great, Good, Miss }
