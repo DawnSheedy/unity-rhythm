@@ -5,4 +5,13 @@ It's being designed with the intention of running it on a 12.9" iPad Pro, since 
 
 > It is a major WIP, and should not be treated as a supported project.
 
+## Contribution
+
+I initially built this as as weekend project to learn unity, so things are rough and currently pretty crude.
+If you would like to help me build this out, please reach out on Discord. (Discord: DawnShee#0001)
+
+## Game File Conversion
+
+[See here](https://github.com/DawnSheedy/jubeat-converter)
+
 [Demo](https://youtu.be/1qs1TlnHIB8)
