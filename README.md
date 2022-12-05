@@ -8,7 +8,7 @@ It's being designed with the intention of running it on a 12.9" iPad Pro, since 
 ## Contribution
 
 I initially built this as as weekend project to learn unity, so things are rough and currently pretty crude.
-If you would like to help me build this out, please reach out on Discord. (Discord: DawnShee#0001)
+If you would like to help me build this out, please reach out on Discord. (Discord: dawnshee#0001)
 
 ## Game File Conversion
 
