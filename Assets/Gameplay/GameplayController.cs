@@ -55,6 +55,14 @@ public class GameplayController : MonoBehaviour
         return getSongBasePath() + "song";
     }
 
+    public string getSongIndexMusicPath() {
+        return getSongBasePath() + "index";
+    }
+
+    public string getSongBannerArtPath() {
+        return getSongBasePath() + "bnr";
+    }
+
     public string getSongMetaPath() {
         return getSongBasePath() + "meta";
     }

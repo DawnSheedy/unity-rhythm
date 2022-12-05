@@ -33,6 +33,10 @@ public class AudioTimeKeeper : MonoBehaviour
         
     }
 
+    public float getTick() {
+        return tick;
+    }
+
     void FixedUpdate() {
         songPosition = (float)AudioSettings.dspTime - dspSongTime;
         tick = tickFrequencyInHz * songPosition;

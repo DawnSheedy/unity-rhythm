@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIAssetAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 64b946eceee24da4583b548b6bc5fbcc, type: 3}
+    - {fileID: 2800000, guid: b5013d246cb11da40b4ec41d39bfdefc, type: 3}
+    - {fileID: 102900000, guid: e78639f4a1852b74885841c96de09af6, type: 3}
+    - {fileID: 102900000, guid: 9b089d74fd1e68a42bc3ae44c99a892d, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 30f1dff09461d75449e8a951e58431a4, type: 3}
+  - {fileID: 21300000, guid: bef4b6219cdc05d49ad77b0d77bcb2b3, type: 3}
+  - {fileID: 21300000, guid: 6bba92c1fe6e3e0468d69e3165422691, type: 3}
+  - {fileID: 21300000, guid: e3007af1adb059a4eb6362e57b3484af, type: 3}
+  - {fileID: 21300000, guid: 8ae6d5029a2dbb94d878b9529b0b61c0, type: 3}
+  - {fileID: 21300000, guid: 64072e2233955564a83149bdcaa3008b, type: 3}
+  - {fileID: 21300000, guid: 9e05bed2c5a02d24d9d2066af6cfaf79, type: 3}
+  - {fileID: 21300000, guid: 2299bf339a919604289245d1c6ceddd5, type: 3}
+  - {fileID: 21300000, guid: af9bcb4352d7539459b109bb4d748abd, type: 3}
+  - {fileID: 21300000, guid: b5013d246cb11da40b4ec41d39bfdefc, type: 3}
+  - {fileID: 21300000, guid: 66f4a53469f2a3445914aa6b44847791, type: 3}
+  - {fileID: 21300000, guid: 4872d6353abfae64d831437267620ae4, type: 3}
+  - {fileID: 21300000, guid: 58de3a555e08779429234157f277c71b, type: 3}
+  - {fileID: 21300000, guid: 09952d7582bbafe498a78b010c20a77a, type: 3}
+  - {fileID: 21300000, guid: 8eeddac58e5263847baf98633263447c, type: 3}
+  - {fileID: 21300000, guid: e76e0356634a7684da2adae1e6d9d212, type: 3}
+  - {fileID: 21300000, guid: e2ce3dc7d1a614740ab5b7776ed3cdd1, type: 3}
+  - {fileID: 21300000, guid: 79c6b48840d93844f9a9f4fb58738ff8, type: 3}
+  - {fileID: 21300000, guid: e07b47ba5b52437498da24a091c16ed6, type: 3}
+  - {fileID: 21300000, guid: 1c9a0c3babe902248b30dff0e9e4e111, type: 3}
+  - {fileID: 21300000, guid: db0e3c3bd47555e45b3c4b9c5f783168, type: 3}
+  - {fileID: 21300000, guid: 67a5d89b60b7e4f44b6e5a9c5fd47d2e, type: 3}
+  - {fileID: 21300000, guid: e855dbab2f95ee84eaba57511eb97d73, type: 3}
+  - {fileID: 21300000, guid: 38a778eb98519a54b90d5cf75c6471ba, type: 3}
+  - {fileID: 21300000, guid: 690bff0c68b69e94fae04684aaaf665c, type: 3}
+  - {fileID: 21300000, guid: cfe016dcf8993c94594be1da761dbf6d, type: 3}
+  - {fileID: 21300000, guid: 64b946eceee24da4583b548b6bc5fbcc, type: 3}
+  - {fileID: 21300000, guid: 47bde28e81f3ccd44b43a5731f55017f, type: 3}
+  - {fileID: 21300000, guid: d833288edd8f8604eb6ac528b8bb2519, type: 3}
+  - {fileID: 21300000, guid: a289dc9e295da1648b1c5027d0126858, type: 3}
+  - {fileID: 21300000, guid: e0fed42f5cb6efc4b9290328d119e8b9, type: 3}
+  - {fileID: 21300000, guid: b87c393f6d89515439dab8f11b7ad7b8, type: 3}
+  - {fileID: 21300000, guid: c7b86f8fed8197c41814c608def864d2, type: 3}
+  - {fileID: 21300000, guid: 85d220af34bb0ba41b6ef180fd1364f0, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - ScoreTextDisplay_00007
+  - ScoreText_00003
+  - ScoreTextDisplay_00004
+  - ScoreText_00005
+  - ScoreTextDisplay_00011
+  - ScoreText_00008
+  - ScoreTextDisplay_00010
+  - ScoreTextDisplay_00009
+  - ScoreTextDisplay_00015
+  - pointsDisplay
+  - ScoreTextDisplay_00020
+  - ScoreTextDisplay_00000
+  - ScoreText_00002
+  - ScoreTextDisplay_00001
+  - ScoreText_00010
+  - ScoreTextDisplay_00013
+  - ScoreTextDisplay_00019
+  - ScoreTextDisplay_00012
+  - ScoreTextDisplay_00006
+  - ScoreText_00006
+  - ScoreText_00004
+  - ScoreTextDisplay_00014
+  - ScoreTextDisplay_00002
+  - ScoreText_00007
+  - ScoreTextDisplay_00017
+  - ScoreTextDisplay_00008
+  - songFrame
+  - ScoreText_00000
+  - ScoreTextDisplay_00005
+  - ScoreText_00001
+  - ScoreText_00009
+  - ScoreTextDisplay_00003
+  - ScoreTextDisplay_00018
+  - ScoreTextDisplay_00016
+  m_RenderDataMap: {}
+  m_Tag: UIAssetAtlas
+  m_IsVariant: 0

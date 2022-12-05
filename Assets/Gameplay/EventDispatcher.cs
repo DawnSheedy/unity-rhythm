@@ -47,20 +47,21 @@ public class EventDispatcher : MonoBehaviour
     public void FireEventsForTick(float tick) {
         // Half second lead time for animations
         while(_ticks.Count > 0 && _ticks.Peek().tick <= tick+150) {
-            FireEvents(_ticks.Dequeue().getEvents());
+            Tick tickObject = _ticks.Dequeue();
+            FireEvents(tickObject.events, tickObject.tick);
         }
     }
 
-    private void FireEvents(GameplayEvent[] events) {
+    private void FireEvents(GameplayEvent[] events, float tick) {
         for (int i=0; i<events.Length; i++) {
-            FireEvent(events[i]);
+            FireEvent(events[i], tick);
         }
     }
 
-    private void FireEvent(GameplayEvent eventToFire) {
+    private void FireEvent(GameplayEvent eventToFire, float tick) {
         switch(eventToFire.type) {
             case GameplayEventType.Note:
-                _noteSpawner.TriggerNote(eventToFire.eventMeta);
+                _noteSpawner.TriggerNote(eventToFire.eventMeta, tick);
                 break;
         }
     }

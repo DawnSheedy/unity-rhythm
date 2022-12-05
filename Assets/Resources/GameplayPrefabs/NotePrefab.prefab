@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4821177405318926272}
   - component: {fileID: 4821177405318926279}
   - component: {fileID: 2739856071079605291}
+  - component: {fileID: 4448551442606230905}
+  - component: {fileID: -1985595979400566900}
   m_Layer: 0
   m_Name: NotePrefab
   m_TagString: Untagged
@@ -94,12 +96,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4429220966074643158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60fb4eeb47fd1044689473058adcaf25, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a4f8f44f99a74d40960ab02571d1aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsHold: 0
-  HoldDuration: 0
-  AnimationName: NoteShutter
+  animationLayerPrefab: {fileID: 5645620644699364591, guid: e3532ba3bf2dee544be3c768240e8fe6, type: 3}
 --- !u!61 &4821177405318926279
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,3 +145,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4448551442606230905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4429220966074643158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e797cb365b72f2741876d1877ae6cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1985595979400566900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4429220966074643158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5228a1c4c5d717640bd3967231c9e26d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IdleAnim: Idle

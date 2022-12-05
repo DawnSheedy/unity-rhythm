@@ -17,7 +17,7 @@ public class NoteSpawner : MonoBehaviour
 
     private GameObject[] _notes = new GameObject[16];
 
-    private NoteScript[] _noteControllers = new NoteScript[16];
+    private NoteController[] _noteControllers = new NoteController[16];
 
     void Awake() {
         _boundsResolver = Camera.main.GetComponent<GameplayBoundsResolver>();
@@ -35,7 +35,7 @@ public class NoteSpawner : MonoBehaviour
 
         for (int x=0; x<_notes.Length; x++) {
             _notes[x] = SpawnNote(x);
-            _noteControllers[x] = _notes[x].GetComponent<NoteScript>();
+            _noteControllers[x] = _notes[x].GetComponent<NoteController>();
         }
     }
 
@@ -45,8 +45,8 @@ public class NoteSpawner : MonoBehaviour
         
     }
 
-    public void TriggerNote(int index) {
-        _noteControllers[index].LeadIn();
+    public void TriggerNote(int index, float targetTiming) {
+        _noteControllers[index].LeadIn(targetTiming);
     }
 
     private GameObject SpawnNote(int index) {

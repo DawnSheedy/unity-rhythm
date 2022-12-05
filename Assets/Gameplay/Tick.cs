@@ -1,17 +1,13 @@
 public class Tick {
     public int tick { get; set; }
-    private GameplayEvent[] _events;
+    public GameplayEvent[] events { get; set; }
 
     public Tick(int tickNumber, GameplayEvent[] events) {
         tick = tickNumber;
-        _events = events;
-    }
-
-    public GameplayEvent[] getEvents() {
-        return _events;
+        this.events = events;
     }
 
     public override string ToString() {
-        return "Tick: "+tick+" EventCount: "+_events.Length;
+        return "Tick: "+tick+" EventCount: "+events.Length;
     }
 }
