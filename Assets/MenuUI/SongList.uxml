@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row;">
+            <ui:TextField picking-mode="Ignore" label="Song Server" value="localhost:8080" text="localhost:8080" name="ServerSetting" style="color: rgb(255, 255, 255); flex-grow: 1;" />
+            <ui:Button text="Fetch Song List" display-tooltip-when-elided="true" name="FetchSongButton" style="color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Container" style="flex-direction: row; height: 100%; width: 100%;">
+            <ui:ListView focusable="true" name="SongList" virtualization-method="DynamicHeight" fixed-item-height="30" style="flex-grow: 2; flex-shrink: 0; max-width: none; min-width: auto; width: 40%; max-height: none;" />
+            <ui:VisualElement name="SongDetailArea" style="flex-grow: 1; flex-shrink: 0; align-items: center; width: 60%;">
+                <ui:VisualElement name="SongDisplayIcon" style="flex-basis: auto; flex-shrink: 1; width: 320px; height: 320px;" />
+                <ui:Label text="SongTitle" display-tooltip-when-elided="true" name="SongDisplayTitle" style="color: rgb(255, 255, 255);" />
+                <ui:Label text="Song Artist" display-tooltip-when-elided="true" name="SongDisplayArtist" style="color: rgb(255, 255, 255);" />
+                <ui:VisualElement name="DifficultyArea" style="flex-direction: row; justify-content: center; align-items: center;">
+                    <ui:Button text="Basic" display-tooltip-when-elided="true" name="Basic" />
+                    <ui:Button text="Advanced" display-tooltip-when-elided="true" name="Advanced" />
+                    <ui:Button text="Extreme" display-tooltip-when-elided="true" name="Extreme" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

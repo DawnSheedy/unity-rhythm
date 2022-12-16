@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/MenuUI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=4c2f0c4b16a64499b89c553c1df509df&amp;type=3#MenuStyles" />
+    <ui:VisualElement name="BgFrame" class="bg-frame" style="border-bottom-width: 3px; border-bottom-color: rgb(84, 81, 161); padding-left: 4px; padding-right: 4px; padding-top: 4px; padding-bottom: 4px; justify-content: flex-start; flex-direction: column; flex-wrap: nowrap;">
+        <ui:Label text="SongTitle" display-tooltip-when-elided="true" name="SongTitle" style="color: rgb(255, 255, 255); height: auto; -unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&apos;); -unity-font-definition: none; font-size: 14px; margin-left: 0; margin-right: 0; margin-top: 2px; margin-bottom: 2px; -unity-font-style: bold;" />
+        <ui:Label text="SongArtist" display-tooltip-when-elided="true" name="SongArtist" style="color: rgb(233, 233, 233); -unity-font-definition: none; -unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&apos;); margin-left: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

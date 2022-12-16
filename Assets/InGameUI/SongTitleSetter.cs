@@ -9,8 +9,7 @@ public class SongTitleSetter : MonoBehaviour
     void Start()
     {
         TextMeshPro textMesh = gameObject.GetComponent<TextMeshPro>();
-        GameplayController controller = GameObject.Find("GameplayController").GetComponent<GameplayController>();
-        textMesh.text = controller.getTitle();
+        textMesh.text = GameObject.Find("GameplayController").GetComponent<SongAssetDownloader>().GetSongMeta().title;
     }
 
     // Update is called once per frame

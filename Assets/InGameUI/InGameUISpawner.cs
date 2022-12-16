@@ -12,11 +12,10 @@ public class InGameUISpawner : MonoBehaviour
     private GameObject _scoreArea;
     private Shader _lineShader;
     private GameObject _bottomLine;
-    // Start is called before the first frame update
-    void Start()
-    {
+
+    void ConductorAlive() {
         Bounds interfaceBounds = Camera.main.GetComponent<GameplayBoundsResolver>().InterfaceBounds;
-        Vector3 upperInterfaceSpawnPoint = interfaceBounds.min + new Vector3(1, interfaceBounds.size.y-1f, 0);
+        Vector3 upperInterfaceSpawnPoint = interfaceBounds.min + new Vector3(1, interfaceBounds.size.y - 1f, 0);
         Vector3 lowerInterfaceSpawnPoint = interfaceBounds.max - new Vector3(0, interfaceBounds.size.y, 0);
         _lineShader = Resources.Load<Shader>("Shaders/LineShader");
         _bannerArt = GameObject.Instantiate(BannerArtRendererPrefab, upperInterfaceSpawnPoint, Quaternion.identity);

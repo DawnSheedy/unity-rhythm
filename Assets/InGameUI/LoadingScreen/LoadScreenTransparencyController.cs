@@ -18,13 +18,14 @@ public class LoadScreenTransparencyController : MonoBehaviour
     void Update()
     {
         if (!_timeKeeper) {
+            if (GameObject.Find("Conductor") == null) return;
             _timeKeeper = GameObject.Find("Conductor").GetComponent<AudioTimeKeeper>();
         }
 
         if (inactive) return;
 
         if (visible) {
-            if (_timeKeeper.timeTilStart < 2f) {
+            if (_timeKeeper.getTimeTilStart() < 2f) {
                 gameObject.BroadcastMessage("DestroyGracefully");
                 visible = false;
             } 

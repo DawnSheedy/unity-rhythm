@@ -2,79 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// In charge of loading/kicking off gameplay based on song data
 public class GameplayController : MonoBehaviour
 {
     public string songLoadOverride;
     public Difficulty songDifficultyOverride;
 
-    private SongMeta _songMeta;
-
     private GameObject _conductor;
 
-    void Awake() {
-        string metaJson = LoadSongMetaJSON();
-        _songMeta = SongMeta.createEventsFromJSON(metaJson);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+    void AssetsLoaded() {
         _conductor = new GameObject("Conductor");
         _conductor.AddComponent<EventDispatcher>();
         _conductor.AddComponent<AudioTimeKeeper>();
+        GameObject.Find("NoteField").BroadcastMessage("ConductorAlive");
+        GameObject.Find("InGameUIController").BroadcastMessage("ConductorAlive");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // On Destroy, destroy created gameObjects as well.
     void Destroy() {
         Destroy(_conductor);
     }
 
-    public string getTitle() {
-        return _songMeta.title;
-    }
-
-    public string getArtist() {
-        return _songMeta.artist;
-    }
-
-    public Difficulty getSelectedDifficulty() {
-        return songDifficultyOverride;
-    }
-
-    private static string[] difficultyFileNames = { "bsc", "adv", "ext" };
-    public string getNoteFilePath() {
-        return getSongBasePath() + difficultyFileNames[(int)getSelectedDifficulty()];
-    }
-
-    public string getSongMusicPath() {
-        return getSongBasePath() + "song";
-    }
-
-    public string getSongIndexMusicPath() {
-        return getSongBasePath() + "index";
-    }
-
-    public string getSongBannerArtPath() {
-        return getSongBasePath() + "bnr";
-    }
-
-    public string getSongMetaPath() {
-        return getSongBasePath() + "meta";
-    }
-
+    // Get the resources path for the song directory
     private string getSongBasePath() {
         return "SongFiles/" + songLoadOverride + "/";
-    }
-
-    private string LoadSongMetaJSON()
-    {
-        TextAsset songMetaTextAsset = Resources.Load<TextAsset>(getSongMetaPath());
-
-        return songMetaTextAsset.text;
     }
 }

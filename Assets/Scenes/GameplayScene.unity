@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 414247502}
   - component: {fileID: 414247503}
   - component: {fileID: 414247504}
+  - component: {fileID: 414247505}
   m_Layer: 0
   m_Name: GameplayController
   m_TagString: Untagged
@@ -270,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a1dd37f46d0084a99f5ad9ab2638f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songLoadOverride: testsong
+  songLoadOverride: test
   songDifficultyOverride: 1
 --- !u!114 &414247504
 MonoBehaviour:
@@ -288,8 +289,21 @@ MonoBehaviour:
   PerfectWeight: 2
   GreatWeight: 1.5
   GoodWeight: 1
+  MissWeight: 0
   currentScore: 0
   currentRank: 0
+--- !u!114 &414247505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414247501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70649e952572d4f1ba88cab0cb78e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &477479777
 GameObject:
   m_ObjectHideFlags: 0

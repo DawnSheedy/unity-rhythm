@@ -8,7 +8,7 @@ public class SongMeta {
     public int length;
     public SongDifficultyMeta[] versions;
 
-    public static SongMeta createEventsFromJSON(string jsonInput) {
+    public static SongMeta createFromJSON(string jsonInput) {
         return JsonUtility.FromJson<SongMeta>(jsonInput);
     }
 }

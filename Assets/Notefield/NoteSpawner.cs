@@ -24,26 +24,20 @@ public class NoteSpawner : MonoBehaviour
         _noteFieldRenderer = gameObject.GetComponent<NotefieldRenderer>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void ConductorAlive() {
         _noteFieldBounds = _boundsResolver.PlayAreaBounds;
         _boardLineWidth = _noteFieldRenderer.lineWidth;
         // Get the w/h of an individual note
-        float noteSize = ((_noteFieldBounds.size.x-(_boardLineWidth*3)) / 4);
-        _noteDimensions = new Bounds(new Vector3(0,0,0), new Vector3(noteSize, noteSize, 0));
+        float noteSize = ((_noteFieldBounds.size.x - (_boardLineWidth * 3)) / 4);
+        _noteDimensions = new Bounds(new Vector3(0, 0, 0), new Vector3(noteSize, noteSize, 0));
 
-        for (int x=0; x<_notes.Length; x++) {
+        for (int x = 0; x < _notes.Length; x++)
+        {
             _notes[x] = SpawnNote(x);
             _noteControllers[x] = _notes[x].GetComponent<NoteController>();
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void TriggerNote(int index, float targetTiming) {
         _noteControllers[index].LeadIn(targetTiming);
