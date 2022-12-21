@@ -101,11 +101,11 @@ public class SongListController : MonoBehaviour
 
         if (selectedSong == null)
         {
-            PlayerPrefs.DeleteKey("SelectedSongTitle");
+            PlayerPrefs.DeleteKey("SelectedSongUuid");
         }
         else
         {
-            PlayerPrefs.SetString("SelectedSongTitle", selectedSong.title);
+            PlayerPrefs.SetString("SelectedSongUuid", selectedSong.uuid);
         }
 
         gameObject.BroadcastMessage("NewSongSelected");

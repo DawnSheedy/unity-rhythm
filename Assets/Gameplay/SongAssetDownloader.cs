@@ -56,7 +56,7 @@ public class SongAssetDownloader : MonoBehaviour
     public void GetSongData()
     {
         string serverHost = PlayerPrefs.GetString("SongServerHost");
-        string songTitle = PlayerPrefs.GetString("SelectedSongTitle");
+        string songTitle = PlayerPrefs.GetString("SelectedSongUuid");
         Difficulty difficulty = (Difficulty)PlayerPrefs.GetInt("SelectedSongDifficulty");
         StartCoroutine(getSongMeta(serverHost, songTitle));
         StartCoroutine(getSongNoteFile(serverHost, songTitle, difficulty));
@@ -111,8 +111,8 @@ public class SongAssetDownloader : MonoBehaviour
 
     IEnumerator getSongIndexClip(string host, string songTitle)
     {
-        string uri = "http://" + host + "/songdata/" + songTitle + "/song.wav";
-        UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip(uri, AudioType.WAV);
+        string uri = "http://" + host + "/songdata/" + songTitle + "/song.ogg";
+        UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip(uri, AudioType.OGGVORBIS);
         yield return uwr.SendWebRequest();
 
         if (!string.IsNullOrEmpty(uwr.error))

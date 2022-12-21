@@ -51,7 +51,7 @@ public class CurrentSongDisplayController : MonoBehaviour
 
     void SetDifficultyAndStartSong(Difficulty difficulty)
     {
-        if (!PlayerPrefs.HasKey("SelectedSongTitle"))
+        if (!PlayerPrefs.HasKey("SelectedSongUuid"))
         {
             return;
         }
@@ -68,7 +68,7 @@ public class CurrentSongDisplayController : MonoBehaviour
     public void GetNewSongData()
     {
         string serverHost = PlayerPrefs.GetString("SongServerHost");
-        string songTitle = PlayerPrefs.GetString("SelectedSongTitle");
+        string songTitle = PlayerPrefs.GetString("SelectedSongUuid");
         StartCoroutine(getSongMeta(serverHost, songTitle));
         StartCoroutine(getSongIndexClip(serverHost, songTitle));
         StartCoroutine(getSongLogo(serverHost, songTitle));
@@ -107,8 +107,8 @@ public class CurrentSongDisplayController : MonoBehaviour
 
     IEnumerator getSongIndexClip(string host, string songTitle)
     {
-        string uri = "http://" + host + "/songdata/" + songTitle + "/index.wav";
-        UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip(uri, AudioType.WAV);
+        string uri = "http://" + host + "/songdata/" + songTitle + "/index.ogg";
+        UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip(uri, AudioType.OGGVORBIS);
         yield return uwr.SendWebRequest();
 
         if (!string.IsNullOrEmpty(uwr.error))

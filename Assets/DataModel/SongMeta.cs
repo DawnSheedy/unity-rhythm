@@ -4,6 +4,7 @@ using UnityEngine;
 public class SongMeta {
     public string title;
     public string artist;
+    public string uuid;
     public int tempo;
     public int length;
     public SongDifficultyMeta[] versions;
