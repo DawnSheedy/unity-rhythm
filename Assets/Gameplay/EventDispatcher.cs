@@ -82,6 +82,7 @@ public class EventDispatcher : MonoBehaviour
         switch(eventToFire.type) {
             case GameplayEventType.Note:
                 _noteSpawner.TriggerNote(eventToFire.eventMeta, tick);
+                _metronome.BroadcastMessage("OnNote");
                 break;
             case GameplayEventType.Beat:
                 _metronome.BroadcastMessage("OnBeat");

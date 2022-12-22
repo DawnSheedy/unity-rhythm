@@ -32,7 +32,7 @@ public class AudioTimeKeeper : MonoBehaviour
     // Connect to dependent components and load audio.
     void Awake() {
         _audio = gameObject.AddComponent<AudioSource>();
-        _audio.volume = 0.25f;
+        _audio.volume = SettingRetriever.getSetting("NoteSounds") || SettingRetriever.getSetting("Metronome") ? 0.25f : 1;
         SongAssetDownloader assetDownloader = GameObject.Find("GameplayController").GetComponent<SongAssetDownloader>();
         _audioResource = assetDownloader.GetSong();
         _songLength = assetDownloader.GetSongMeta().length + 300*2;

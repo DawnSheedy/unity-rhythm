@@ -13,12 +13,21 @@ public class SongListController : MonoBehaviour
     private ListView _listView;
 
     private SongMeta[] songMeta;
+    private bool _showFavorites = false;
 
     // Start is called before the first frame update
     void Start()
     {
         _root = gameObject.GetComponent<UIDocument>().rootVisualElement;
         _listView = _root.Q<ListView>("SongList");
+        _root.Q<Button>("ShowFavoritesButton").RegisterCallback<ClickEvent>(ToggleShowFavorites);
+        InitializeSongList();
+    }
+
+    void ToggleShowFavorites(ClickEvent evt)
+    {
+        _showFavorites = !_showFavorites;
+        GetSongList();
     }
 
     void ServerChanged()
@@ -29,7 +38,7 @@ public class SongListController : MonoBehaviour
     public void GetSongList()
     {
         string serverHost = PlayerPrefs.GetString("SongServerHost");
-        StartCoroutine(getSongListRequest("http://" + serverHost + "/api/songs/"));
+        StartCoroutine(getSongListRequest("http://" + serverHost + "/api/songs/" + (_showFavorites ? "favorites" : "")));
     }
 
     IEnumerator getSongListRequest(string uri)
@@ -50,11 +59,12 @@ public class SongListController : MonoBehaviour
     private void loadNewSongsFromJson(string json)
     {
         SongMetaApiResponse apiRes = SongMetaApiResponse.createFromJSON(json);
-        songMeta = apiRes.songs;
-        InitializeCharacterList();
+        // Set the actual item's source list/array
+        _listView.itemsSource = songMeta = apiRes.songs;
+        _listView.RefreshItems();
     }
 
-    public void InitializeCharacterList()
+    public void InitializeSongList()
     {
         FillCharacterList();
 
@@ -88,10 +98,6 @@ public class SongListController : MonoBehaviour
         {
             (item.userData as SongListItemController).SetCharacterData(songMeta[index]);
         };
-
-
-        // Set the actual item's source list/array
-        _listView.itemsSource = songMeta;
     }
 
     void OnCharacterSelected(IEnumerable<object> selectedItems)

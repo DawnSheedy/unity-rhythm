@@ -7,6 +7,7 @@ public class SongMeta {
     public string uuid;
     public int tempo;
     public int length;
+    public bool favorited;
     public SongDifficultyMeta[] versions;
 
     public static SongMeta createFromJSON(string jsonInput) {

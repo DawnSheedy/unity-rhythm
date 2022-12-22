@@ -12,27 +12,23 @@ public class CurrentSongDisplayController : MonoBehaviour
     Label _title;
     Label _artist;
     VisualElement _icon;
+    Button _favoriteButton;
+    private bool _favorited;
 
-    Button _basicStart;
-    Button _advancedStart;
-    Button _extremeStart;
-
-    // Start is called before the first frame update
     void Start()
     {
         _audioSource = gameObject.AddComponent<AudioSource>();
-        _audioSource.volume = SettingRetriever.getSetting("Metronome") ? 0.25f : 1f;
+        _audioSource.volume = SettingRetriever.getSetting("Metronome") || SettingRetriever.getSetting("NoteSounds") ? 0.25f : 1f;
         VisualElement root = gameObject.GetComponent<UIDocument>().rootVisualElement;
         _title = root.Q<Label>("SongDisplayTitle");
         _artist = root.Q<Label>("SongDisplayArtist");
         _icon = root.Q<VisualElement>("SongDisplayIcon");
 
-        _basicStart = root.Q<Button>("Basic");
-        _basicStart.RegisterCallback<ClickEvent>(HandleStartBasic);
-        _advancedStart = root.Q<Button>("Advanced");
-        _advancedStart.RegisterCallback<ClickEvent>(HandleStartAdvanced);
-        _extremeStart = root.Q<Button>("Extreme");
-        _extremeStart.RegisterCallback<ClickEvent>(HandleStartExtreme);
+        root.Q<Button>("Basic").RegisterCallback<ClickEvent>(HandleStartBasic);
+        root.Q<Button>("Advanced").RegisterCallback<ClickEvent>(HandleStartAdvanced);
+        root.Q<Button>("Extreme").RegisterCallback<ClickEvent>(HandleStartExtreme);
+        _favoriteButton = root.Q<Button>("FavoriteButton");
+        _favoriteButton.RegisterCallback<ClickEvent>(ToggleFavorite);
     }
 
     void HandleStartBasic(ClickEvent evt)
@@ -48,6 +44,13 @@ public class CurrentSongDisplayController : MonoBehaviour
     void HandleStartExtreme(ClickEvent evt)
     {
         SetDifficultyAndStartSong(Difficulty.Extreme);
+    }
+
+    void ToggleFavorite(ClickEvent evt)
+    {
+        string serverHost = PlayerPrefs.GetString("SongServerHost");
+        string songTitle = PlayerPrefs.GetString("SelectedSongUuid");
+        StartCoroutine(favoriteSong(serverHost, songTitle));
     }
 
     void SetDifficultyAndStartSong(Difficulty difficulty)
@@ -85,7 +88,7 @@ public class CurrentSongDisplayController : MonoBehaviour
 
     IEnumerator getSongMeta(string host, string songTitle)
     {
-        string uri = "http://" + host + "/songdata/" + songTitle + "/meta.json";
+        string uri = "http://" + host + "/api/songs/specific/" + songTitle;
         UnityWebRequest uwr = UnityWebRequest.Get(uri);
         yield return uwr.SendWebRequest();
 
@@ -99,11 +102,37 @@ public class CurrentSongDisplayController : MonoBehaviour
         }
     }
 
+    IEnumerator favoriteSong(string host, string songTitle)
+    {
+        string uri = "http://" + host + "/api/songs/favorites";
+        string json = "{ \"songId\": \"" + songTitle + "\", \"favorite\": " + (_favorited ? "false" : "true") + "}";
+
+        var req = new UnityWebRequest(uri, "POST");
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        req.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+        req.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        req.SetRequestHeader("Content-Type", "application/json");
+
+        //Send the request then wait here until it returns
+        yield return req.SendWebRequest();
+
+        if (!string.IsNullOrEmpty(req.error))
+        {
+            Debug.Log("Error While Sending: " + req.error);
+        }
+        else
+        {
+            ProcessNewSongMeta(req.downloadHandler.text);
+        }
+    }
+
     void ProcessNewSongMeta(string json)
     {
         SongMeta newMeta = SongMeta.createFromJSON(json);
         _title.text = newMeta.title;
         _artist.text = newMeta.artist;
+        _favorited = newMeta.favorited;
+        _favoriteButton.text = _favorited ? "Remove from Favorites" : "Favorite";
     }
 
     IEnumerator getSongIndexClip(string host, string songTitle)

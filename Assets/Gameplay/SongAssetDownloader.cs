@@ -66,7 +66,7 @@ public class SongAssetDownloader : MonoBehaviour
 
     IEnumerator getSongMeta(string host, string songTitle)
     {
-        string uri = "http://" + host + "/songdata/" + songTitle + "/meta.json";
+        string uri = "http://" + host + "/api/songs/specific/" + songTitle;
         UnityWebRequest uwr = UnityWebRequest.Get(uri);
         yield return uwr.SendWebRequest();
 
