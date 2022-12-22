@@ -10,7 +10,6 @@ public class NoteController : MonoBehaviour
     private string IdleAnim = "Idle";
 
     private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
 
     private AudioTimeKeeper _timeKeeper;
     private float _nextJudgementTime;
@@ -20,9 +19,9 @@ public class NoteController : MonoBehaviour
     private NoteHoldAnimator _noteHoldAnimator;
     private NoteJudgementAnimator _noteScoreAnimator;
     private ScoreKeeper _scoreKeeper;
-    private float PerfectThreshold = (40f/1000f)*300f;
-    private float GreatThreshold = (80f/1000f)*300f;
-    private float GoodThreshold = (160f/1000f)*300f;
+    private float PerfectThreshold = (80f/1000f);
+    private float GreatThreshold = (160f/1000f);
+    private float GoodThreshold = (320f/1000f);
 
     void Awake() {
         _noteHoldLayer = Instantiate(animationLayerPrefab, gameObject.transform.localPosition, Quaternion.identity);
@@ -41,8 +40,6 @@ public class NoteController : MonoBehaviour
         _noteScoreLayer.transform.localScale = gameObject.transform.localScale;
         _noteScoreLayer.name = gameObject.name + " (Score Indicator)";
         _noteScoreAnimator.parentNote = gameObject;
-        _timeKeeper = GameObject.Find("Conductor").GetComponent<AudioTimeKeeper>();
-        _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _animator = gameObject.GetComponent<Animator>();
     }
 
@@ -64,14 +61,14 @@ public class NoteController : MonoBehaviour
             return;
         }
 
-        float currentTick = _timeKeeper.getTick();
-        float tickDifference = Mathf.Abs(currentTick - _nextJudgementTime);
+        float currentTime = (float)AudioSettings.dspTime;
+        float timeDifference = Mathf.Abs(currentTime - _nextJudgementTime);
 
-        if (tickDifference < PerfectThreshold) {
+        if (timeDifference < PerfectThreshold) {
             ProcessJudgement(Judgement.Perfect);
-        } else if (tickDifference < GreatThreshold) {
+        } else if (timeDifference < GreatThreshold) {
             ProcessJudgement(Judgement.Great);
-        } else if (tickDifference < GoodThreshold) {
+        } else if (timeDifference < GoodThreshold) {
             ProcessJudgement(Judgement.Good);
         } else {
             ProcessJudgement(Judgement.Miss);
@@ -98,7 +95,7 @@ public class NoteController : MonoBehaviour
 
     public void LeadIn(float targetTiming)
     {
-        _nextJudgementTime = targetTiming;
+        _nextJudgementTime = (float)AudioSettings.dspTime + 0.5f;
         _noteReadyForJudgement = true;
         _noteHoldLayer.SendMessage("JudgementStarting");
         _animator.Play(JudgementApproachAnim);

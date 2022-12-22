@@ -21,6 +21,7 @@ public class CurrentSongDisplayController : MonoBehaviour
     void Start()
     {
         _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.volume = SettingRetriever.getSetting("Metronome") ? 0.25f : 1f;
         VisualElement root = gameObject.GetComponent<UIDocument>().rootVisualElement;
         _title = root.Q<Label>("SongDisplayTitle");
         _artist = root.Q<Label>("SongDisplayArtist");

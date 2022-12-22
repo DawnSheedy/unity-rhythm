@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
     In charge of playing the songfile for the selected song, as well as keeping track of the current tick.
@@ -14,6 +15,9 @@ public class AudioTimeKeeper : MonoBehaviour
     [Tooltip("How long to wait before starting the song playback on Load")]
     public static float songStartOffset = 5f;
 
+    [Tooltip("Adjust latency")]
+    public static float audioDelay;
+
     private float tick = 0;
     private float songPosition;
     private float dspSongTime;
@@ -21,15 +25,18 @@ public class AudioTimeKeeper : MonoBehaviour
     private bool songStarted;
     private float _songStartTime;
     private AudioSource _audio;
-    private GameplayController _controller;
     private AudioClip _audioResource;
     private EventDispatcher _eventDispatcher;
+    private float _songLength;
 
     // Connect to dependent components and load audio.
     void Awake() {
-        _controller = GameObject.Find("GameplayController").GetComponent<GameplayController>();
         _audio = gameObject.AddComponent<AudioSource>();
-        _audioResource = GameObject.Find("GameplayController").GetComponent<SongAssetDownloader>().GetSong();
+        _audio.volume = 0.25f;
+        SongAssetDownloader assetDownloader = GameObject.Find("GameplayController").GetComponent<SongAssetDownloader>();
+        _audioResource = assetDownloader.GetSong();
+        _songLength = assetDownloader.GetSongMeta().length + 300*2;
+
         _eventDispatcher = gameObject.GetComponent<EventDispatcher>();
         _audio.clip = _audioResource;
     }
@@ -50,7 +57,8 @@ public class AudioTimeKeeper : MonoBehaviour
     {
         if (!songStarted && AudioSettings.dspTime >= _songStartTime) {
             dspSongTime = (float)AudioSettings.dspTime;
-            _audio.PlayDelayed(0f);
+            UnityEngine.iOS.Device.hideHomeButton = true;
+            _audio.PlayDelayed(audioDelay);
             songStarted = true;
         } else {
             timeTilStart = _songStartTime - (float)AudioSettings.dspTime;
@@ -71,6 +79,11 @@ public class AudioTimeKeeper : MonoBehaviour
         if (!songStarted) return;
         songPosition = (float)AudioSettings.dspTime - dspSongTime;
         tick = tickFrequencyInHz * songPosition;
+        if (tick >= _songLength)
+        {
+            UnityEngine.iOS.Device.hideHomeButton = false;
+            SceneManager.LoadScene("SongSelectScene");
+        }
         _eventDispatcher.FireEventsForTick(tick);
     }
 }

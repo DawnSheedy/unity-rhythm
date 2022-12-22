@@ -1,2 +1,15 @@
 .bg-frame {
 }
+
+.text-normal {
+    -unity-font-definition: url('project://database/Assets/Fonts/Regular_Asset.asset?fileID=11400000&guid=3f7ee2895870d46cd83959ac3a0dc448&type=2#Regular_Asset');
+    -unity-font: url('project://database/Assets/Fonts/MPLUS2-Medium.ttf?fileID=12800000&guid=ceb86ffdfe6889d45ac91e677c29f523&type=3#MPLUS2-Medium');
+    color: rgba(255, 255, 255, 255);
+}
+
+.text-bold {
+    -unity-font: url('project://database/Assets/Fonts/MPLUS2-Black.ttf?fileID=12800000&guid=074a1daa0428c3c42a219a1d1d57319d&type=3#MPLUS2-Black');
+    -unity-font-definition: url('project://database/Assets/Fonts/Bold_Asset.asset?fileID=11400000&guid=135d16e14556e47fb8bec6f7ef3e23b7&type=2#Bold_Asset');
+    font-size: 16px;
+    color: rgba(255, 255, 255, 255);
+}

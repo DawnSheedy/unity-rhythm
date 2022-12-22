@@ -290,6 +290,7 @@ MonoBehaviour:
   GreatWeight: 1.5
   GoodWeight: 1
   MissWeight: 0
+  currentCombo: 0
   currentScore: 0
   currentRank: 0
 --- !u!114 &414247505
