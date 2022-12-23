@@ -6,9 +6,9 @@
                 <ui:Button text="Toggle Metronome" display-tooltip-when-elided="true" name="MetronomeToggle" enable-rich-text="true" />
                 <ui:Label text="Label" display-tooltip-when-elided="true" name="MetronomeState" class="text-normal" />
             </ui:VisualElement>
-            <ui:VisualElement name="HitSoundsSetting" style="flex-direction: row; align-items: center;">
-                <ui:Button text="Toggle Hit Sounds" display-tooltip-when-elided="true" name="HitSoundsToggle" />
-                <ui:Label text="Label" display-tooltip-when-elided="true" name="HitSoundsState" class="text-normal" />
+            <ui:VisualElement name="DemoModeSetting" style="flex-direction: row; align-items: center;">
+                <ui:Button text="Toggle Demo Mode" display-tooltip-when-elided="true" name="DemoModeToggle" />
+                <ui:Label text="Label" display-tooltip-when-elided="true" name="DemoModeState" class="text-normal" />
             </ui:VisualElement>
             <ui:VisualElement name="NoteSoundsSetting" style="flex-direction: row; align-items: center;">
                 <ui:Button text="Toggle Note Sounds" display-tooltip-when-elided="true" name="NoteSoundsToggle" />

@@ -270,5 +270,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingKeys:
   - Metronome
-  - HitSounds
+  - DemoMode
   - NoteSounds

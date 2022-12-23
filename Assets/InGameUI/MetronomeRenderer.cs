@@ -28,7 +28,6 @@ public class MetronomeRenderer : MonoBehaviour
     {
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         _audio = gameObject.AddComponent<AudioSource>();
-        _audio.clip = Sound;
         _audio.loop = false;
         _nextTaps = new Queue<double>();
         _playMetronome = SettingRetriever.getSetting("Metronome");
@@ -68,8 +67,7 @@ public class MetronomeRenderer : MonoBehaviour
 
     void Pulse() {
         _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1);
-        _audio.Stop();
-        _audio.Play();
+        _audio.PlayOneShot(Sound);
     }
 
 }

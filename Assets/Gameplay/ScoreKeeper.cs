@@ -25,12 +25,17 @@ public class ScoreKeeper : MonoBehaviour
     private float pointsPerGreat = 0;
     private float pointsPerGood = 0;
     private float pointsPerMiss = 0;
-    public int currentCombo;
+    public int currentCombo = 0;
     public float currentScore = 0;
     public Rank currentRank = Rank.PreScore;
     private int notesJudged = 0;
     private int totalNotes;
     private List<int> combos;
+
+    void Start()
+    {
+        combos = new List<int>();
+    }
 
     // Entrypoint for new judgements delivered by the NoteControllers.
     public void ProcessJudgement(Judgement judgement) {
@@ -48,8 +53,11 @@ public class ScoreKeeper : MonoBehaviour
                 break;
             case Judgement.Miss:
                 currentScore += pointsPerMiss;
-                combos.Add(currentCombo-1);
-                currentCombo = 0;
+                if (currentCombo != 1)
+                {
+                    combos.Add(currentCombo - 1);
+                    currentCombo = 0;
+                }
                 break;
         }
         UpdateRank();

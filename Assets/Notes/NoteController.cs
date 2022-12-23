@@ -11,7 +11,6 @@ public class NoteController : MonoBehaviour
 
     private Animator _animator;
 
-    private AudioTimeKeeper _timeKeeper;
     private float _nextJudgementTime;
     private bool _noteReadyForJudgement = false;
     private GameObject _noteHoldLayer;
@@ -19,9 +18,11 @@ public class NoteController : MonoBehaviour
     private NoteHoldAnimator _noteHoldAnimator;
     private NoteJudgementAnimator _noteScoreAnimator;
     private ScoreKeeper _scoreKeeper;
-    private float PerfectThreshold = (80f/1000f);
-    private float GreatThreshold = (160f/1000f);
-    private float GoodThreshold = (320f/1000f);
+    private float PerfectThreshold = (40f/1000f);
+    private float GreatThreshold = (80f/1000f);
+    private float GoodThreshold = (160f/1000f);
+
+    private bool _demoMode;
 
     void Awake() {
         _noteHoldLayer = Instantiate(animationLayerPrefab, gameObject.transform.localPosition, Quaternion.identity);
@@ -41,6 +42,7 @@ public class NoteController : MonoBehaviour
         _noteScoreLayer.name = gameObject.name + " (Score Indicator)";
         _noteScoreAnimator.parentNote = gameObject;
         _animator = gameObject.GetComponent<Animator>();
+        _demoMode = SettingRetriever.getSetting("DemoMode");
     }
 
     void OnTouchStart() {
@@ -50,7 +52,7 @@ public class NoteController : MonoBehaviour
 
     void Update() {
         // If note is done rendering, goal was in the past, and the user never clicked it, judge as a miss.
-        if (_noteReadyForJudgement && _animator.GetCurrentAnimatorStateInfo(0).IsName(IdleAnim) && _timeKeeper.getTick() > _nextJudgementTime) {
+        if (_noteReadyForJudgement && _animator.GetCurrentAnimatorStateInfo(0).IsName(IdleAnim) && (float)AudioSettings.dspTime > _nextJudgementTime) {
             ProcessJudgement(Judgement.Miss);
         }
     }
@@ -87,6 +89,14 @@ public class NoteController : MonoBehaviour
 
     void DismissShutter() {
         _animator.Play(IdleAnim);
+    }
+
+    void TouchPointAnimReached()
+    {
+        if (_demoMode)
+        {
+            ProcessJudgement(Judgement.Perfect);
+        }
     }
 
     public void MarkFirst() {

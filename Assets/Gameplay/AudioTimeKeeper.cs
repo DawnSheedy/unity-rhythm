@@ -35,7 +35,7 @@ public class AudioTimeKeeper : MonoBehaviour
         _audio.volume = SettingRetriever.getSetting("NoteSounds") || SettingRetriever.getSetting("Metronome") ? 0.25f : 1;
         SongAssetDownloader assetDownloader = GameObject.Find("GameplayController").GetComponent<SongAssetDownloader>();
         _audioResource = assetDownloader.GetSong();
-        _songLength = assetDownloader.GetSongMeta().length + 300*2;
+        _songLength = assetDownloader.GetSongMeta().length + 300;
 
         _eventDispatcher = gameObject.GetComponent<EventDispatcher>();
         _audio.clip = _audioResource;
