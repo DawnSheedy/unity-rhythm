@@ -93,7 +93,7 @@ public class NoteController : MonoBehaviour
 
     void TouchPointAnimReached()
     {
-        if (_demoMode)
+        if (_demoMode && _noteReadyForJudgement)
         {
             ProcessJudgement(Judgement.Perfect);
         }

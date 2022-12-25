@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 61476859109525697}
   - component: {fileID: 444117392786684742}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: songFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4179960729359592091}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.48, y: 0.013, z: 0}
+  m_LocalPosition: {x: 2.48, y: 0.042999983, z: 0}
   m_LocalScale: {x: 0.9740201, y: 0.9701854, z: 1.9173625}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2998815486975284160}
   - component: {fileID: 625886291686330573}
   - component: {fileID: 7200535861273950873}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SongTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.52, y: 1.51}
+  m_AnchoredPosition: {x: 6.52, y: 1.5400001}
   m_SizeDelta: {x: 4.31, y: 0.444}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2998815486975284160
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 6381642895439629088}
   - component: {fileID: 3824771635955871132}
   - component: {fileID: 961802643257246440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ArtistName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.52, y: 0.49}
+  m_AnchoredPosition: {x: 6.52, y: 0.52}
   m_SizeDelta: {x: 4.31, y: 0.444}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6381642895439629088
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 7805672730643780319}
   - component: {fileID: 2505054858054066077}
   - component: {fileID: 2454199344083516217}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BannerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ SpriteRenderer:
   m_Size: {x: 3.2, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2454199344083516217

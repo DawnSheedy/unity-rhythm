@@ -9,6 +9,7 @@ public class EventDispatcher : MonoBehaviour
     private NoteSpawner _noteSpawner;
     private SongAssetDownloader _assets;
     private GameObject _metronome;
+    private GameObject _background;
 
     // Connect to dependencies
     void Awake()
@@ -59,6 +60,7 @@ public class EventDispatcher : MonoBehaviour
         // Report final note count to scorekeeper to set up calculation logic
         _controller.GetComponent<ScoreKeeper>().ReportNoteCount(noteCount);
         _metronome = GameObject.Find("Metronome");
+        _background = GameObject.Find("Background");
     }
 
     // Fire all events before/during a given tick
@@ -83,12 +85,15 @@ public class EventDispatcher : MonoBehaviour
             case GameplayEventType.Note:
                 _noteSpawner.TriggerNote(eventToFire.eventMeta, tick);
                 _metronome.BroadcastMessage("OnNote");
+                _background.BroadcastMessage("OnNote");
                 break;
             case GameplayEventType.Beat:
                 _metronome.BroadcastMessage("OnBeat");
+                _background.BroadcastMessage("OnBeat");
                 break;
             case GameplayEventType.Measure:
                 _metronome.BroadcastMessage("OnMeasure");
+                _background.BroadcastMessage("OnMeasure");
                 break;
         }
     }
