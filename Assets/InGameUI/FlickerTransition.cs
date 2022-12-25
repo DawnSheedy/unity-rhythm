@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class FlickerTransition : MonoBehaviour
 {
@@ -15,13 +16,16 @@ public class FlickerTransition : MonoBehaviour
     private bool doDestroy;
     private float maxOpacity;
     private SpriteRenderer _spriteRenderer;
+    private TextMeshPro _textMesh;
     // Start is called before the first frame update
     void Start()
     {
         _spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        maxOpacity = _spriteRenderer.color.a;
+        _textMesh = gameObject.GetComponent<TextMeshPro>();
+        Color c = getColor();
+        maxOpacity = c.a;
         if (!visible) {
-            _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 0);
+            setColor(new Color(c.r, c.g, c.b, 0));
         }
         delay = Random.Range(0, randomDelayRange);
     }
@@ -31,7 +35,8 @@ public class FlickerTransition : MonoBehaviour
     {
         if (!isAnimating || Time.time < startTime) return;
 
-        _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, Mathf.MoveTowards(_spriteRenderer.color.a, visible ? 0 : maxOpacity, Time.deltaTime * speed));
+        Color c = getColor();
+        setColor(new Color(c.r, c.g, c.b, Mathf.MoveTowards(c.a, visible ? 0 : maxOpacity, Time.deltaTime * speed)));
 
         if (_spriteRenderer.color.a == 0) {
             flickerCount++;
@@ -48,6 +53,22 @@ public class FlickerTransition : MonoBehaviour
             isAnimating = false;
             flickerCount = 0;   
         }
+    }
+
+    void setColor(Color c) {
+        if (_spriteRenderer) {
+            _spriteRenderer.color = c;
+        }
+        if (_textMesh) {
+            _textMesh.color = c;
+        }
+    }
+
+    Color getColor() {
+        if (_textMesh) {
+            return _textMesh.color;
+        }
+        return _spriteRenderer.color;
     }
 
     public void ToggleVisibility() {
