@@ -3,7 +3,7 @@
     <ui:VisualElement>
         <ui:VisualElement style="flex-direction: row;">
             <ui:Button text="Toggle Favorites Only" display-tooltip-when-elided="true" name="ShowFavoritesButton" />
-            <ui:TextField picking-mode="Ignore" label="Song Server" value="localhost:8080" text="localhost:8080" name="ServerSetting" style="color: rgb(255, 255, 255); flex-grow: 1;" />
+            <ui:TextField picking-mode="Ignore" label="Song Server" value="localhost:8080" text="localhost:8080" name="ServerSetting" style="color: rgb(0, 0, 0); flex-grow: 1;" />
             <ui:Button text="Fetch Song List" display-tooltip-when-elided="true" name="FetchSongButton" style="color: rgb(255, 255, 255);" />
             <ui:Button text="Settings" display-tooltip-when-elided="true" name="SettingsButton" />
         </ui:VisualElement>

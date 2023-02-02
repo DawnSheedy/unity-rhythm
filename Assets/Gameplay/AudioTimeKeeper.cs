@@ -57,7 +57,6 @@ public class AudioTimeKeeper : MonoBehaviour
     {
         if (!songStarted && AudioSettings.dspTime >= _songStartTime) {
             dspSongTime = (float)AudioSettings.dspTime;
-            UnityEngine.iOS.Device.hideHomeButton = true;
             _audio.PlayDelayed(audioDelay);
             songStarted = true;
         } else {
@@ -81,7 +80,6 @@ public class AudioTimeKeeper : MonoBehaviour
         tick = tickFrequencyInHz * songPosition;
         if (tick >= _songLength)
         {
-            UnityEngine.iOS.Device.hideHomeButton = false;
             SceneManager.LoadScene("SongSelectScene");
         }
         _eventDispatcher.FireEventsForTick(tick);
